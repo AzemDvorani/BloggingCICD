@@ -1,8 +1,16 @@
 #Code-Commit
 
-resource "aws_codecommit_repository" "ecommercerepos" {
+variable "codebuild_project_name" {
+  description = "The name of the CodeBuild project"
+  type        = string
+  default     = "my-codebuild-project"
+}
 
-  repository_name = "BloggingRepos"
+
+
+resource "aws_codecommit_repository" "Bloggingrepos" {
+
+  repository_name = "BloggingCICD"
   description     = "Blogging :: deploying infrastructure"
 }
 
@@ -20,7 +28,7 @@ resource "aws_codebuild_project" "Codebuildblogging" {
   }
   source {
     type            = "CODECOMMIT"
-    location        = "https://git-codecommit.eu-west-2.amazonaws.com/v1/repos/ecommerceRepos"
+    location        = "https://git-codecommit.eu-west-2.amazonaws.com/v1/repos/BloggingCICD"
     git_clone_depth = 1
 
 
@@ -29,7 +37,7 @@ resource "aws_codebuild_project" "Codebuildblogging" {
   artifacts {
     type = "NO_ARTIFACTS"
   }
-  source_version = "refs/heads/master^{45e75652a6d8ab40869aed3270d6b94124114a4b}"
+  source_version = "refs/heads/master^{1cb85722f53573761241d1fa429d45f201a97725}"
 }
 
 
